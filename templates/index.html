@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Virtual Try-On</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    .grid { display: flex; gap: 15px; margin-bottom: 20px; }
+    .box { flex: 1; border: 2px dashed #ccc; padding: 12px; border-radius: 8px; text-align: center; }
+    .preview { width: 100%; height: 180px; object-fit: contain; margin-top: 10px; display: none; }
+    button { background: #0070f3; color: white; border: none; padding: 10px 20px; font-size: 15px; border-radius: 6px; cursor: pointer; }
+    button:disabled { background: #aaa; cursor: not-allowed; }
+    #status { margin-top: 15px; font-weight: bold; color: #555; }
+    #resultTimer { font-size: 14px; color: #666; margin-top: 40px; display: none; }
+  </style>
+</head>
+<body>
+  <h2>Virtual Try-On Demo</h2>
+
+  <form id="tryonForm">
+    <div class="grid">
+      <div class="box">
+        <h4>1. Person</h4>
+        <input type="file" id="personInput" accept="image/*" required>
+        <img id="personPreview" class="preview">
+      </div>
+
+      <div class="box">
+        <h4>2. Garment</h4>
+        <input type="file" id="garmentInput" accept="image/*" required>
+        <img id="garmentPreview" class="preview">
+      </div>
+
+      <div class="box">
+        <h4>3. Result</h4>
+        <div id="resultTimer">Generating... (0s)</div>
+        <img id="resultImg" class="preview">
+      </div>
+    </div>
+
+    <button type="submit" id="submitBtn">Generate Try-On</button>
+  </form>
+
+  <div id="status"></div>
+
+  <script>
+    personInput.onchange = e => {
+      personPreview.src = URL.createObjectURL(e.target.files[0]);
+      personPreview.style.display = 'block';
+    };
+
+    garmentInput.onchange = e => {
+      garmentPreview.src = URL.createObjectURL(e.target.files[0]);
+      garmentPreview.style.display = 'block';
+    };
+
+    tryonForm.onsubmit = async e => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      resultImg.style.display = 'none';
+
+      let seconds = 0;
+      resultTimer.innerText = "Generating... (0s)";
+      resultTimer.style.display = 'block';
+      const timer = setInterval(() => {
+        seconds++;
+        resultTimer.innerText = `Generating... (${seconds}s)`;
+      }, 1000);
+
+      const data = new FormData();
+      data.append('person', personInput.files[0]);
+      data.append('garment', garmentInput.files[0]);
+
+      try {
+        const res = await fetch('/tryon', { method: 'POST', body: data });
+        const blob = await res.blob();
+        resultImg.src = URL.createObjectURL(blob);
+        resultImg.style.display = 'block';
+        status.innerText = `Done in ${seconds}s!`;
+      } catch (err) {
+        status.innerText = "Error generating image.";
+      } finally {
+        clearInterval(timer);
+        resultTimer.style.display = 'none';
+        submitBtn.disabled = false;
+      }
+    };
+  </script>
+</body>
+</html>
