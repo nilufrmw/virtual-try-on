@@ -3,7 +3,7 @@ from flask import Flask, request, render_template, send_file
 from gradio_client import Client, handle_file
 
 app = Flask(__name__)
-client = Client("yisol/IDM-VTON", token="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")
+client = Client("yisol/IDM-VTON", token="yourtoken")
 
 os.makedirs('uploads', exist_ok=True)
 
