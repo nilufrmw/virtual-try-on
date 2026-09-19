@@ -6,9 +6,8 @@ virtual-tryon/
 │   └── index.html      # Frontend UI (HTML, CSS, Vanilla JS)
 ├── uploads/            # Temporary storage for uploaded images
 └── README.md
-</pre>
-   
-## Running the Application
+
+Running the Application
 
 1. Start the Flask server:
    `python3 app.py`
@@ -19,3 +18,4 @@ virtual-tryon/
 3. Select an upper-body image in box 1 (Person)
 4. Select a garment image in box 2 (Garment)
 5. Click Generate Try-On
+</pre>
