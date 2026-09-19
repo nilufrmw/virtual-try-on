@@ -10,12 +10,11 @@ virtual-tryon/
 Running the Application
 
 1. Start the Flask server:
-   `python3 app.py`
+    python3 app.py
 
 2. Open in a web browser:
-   `http://127.0.0.1:5000`
+    http://127.0.0.1:5000
 
-3. Select an upper-body image in box 1 (Person)
-4. Select a garment image in box 2 (Garment)
+3. Select an upper-body image in box 1
+4. Select a cloth image in box 2
 5. Click Generate Try-On
-</pre>
