@@ -1,11 +1,11 @@
-## Project Structure
-<pre>
+Project Structure
+
 virtual-tryon/
-├── app.py              # Flask server and Gradio API client
-├── templates/
-│   └── index.html      # Frontend UI (HTML, CSS, Vanilla JS)
-├── uploads/            # Temporary storage for uploaded images
-└── README.md
+|-- app.py          Flask server and Gradio API client
+|-- templates/
+|   |-- index.html  Frontend UI (HTML, CSS, Vanilla JS)
+|-- uploads/        Temporary storage for uploaded images
+|-- README
 
 Running the Application
 
