@@ -1,10 +1,10 @@
 Project Structure
 
 virtual-tryon/
-|-- app.py          Flask server and Gradio API client
+|-- app.py          backend (flask)
 |-- templates/
-|   |-- index.html  Frontend UI (HTML, CSS, Vanilla JS)
-|-- uploads/        Temporary storage for uploaded images
+|   |-- index.html  frontend
+|-- uploads/        uploaded images
 |-- README
 
 Running the Application
