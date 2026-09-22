@@ -1,11 +1,11 @@
 Project Structure
 
 virtual-tryon/
-|-- app.py          backend (flask)
 |-- templates/
 |   |-- index.html  frontend
 |-- uploads/        uploaded images
 |-- README
+|-- app.py          backend (flask)
 
 Running the Application
 
